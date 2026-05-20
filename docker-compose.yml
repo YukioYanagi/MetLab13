@@ -1,0 +1,41 @@
+services:
+  nats:
+    image: nats:2.11-alpine
+    command: ["-js", "-m", "8222"]
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+
+  search-agent:
+    build:
+      context: .
+      dockerfile: docker/search-agent.Dockerfile
+    environment:
+      NATS_URL: nats://nats:4222
+      SEARCH_SUBJECT: hotel.rooms.search
+      SEARCH_QUEUE: hotel-search-workers
+      RESULT_SUBJECT: hotel.rooms.search.result
+      LOG_DIR: /app/logs
+      LOG_LEVEL: INFO
+    depends_on:
+      - nats
+    volumes:
+      - ./logs:/app/logs
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
+    environment:
+      NATS_URL: nats://nats:4222
+      SEARCH_SUBJECT: hotel.rooms.search
+      REQUEST_TIMEOUT: "2.0"
+      MAX_RETRIES: "3"
+      LOG_DIR: /app/logs
+      LOG_LEVEL: INFO
+    depends_on:
+      - nats
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./logs:/app/logs
