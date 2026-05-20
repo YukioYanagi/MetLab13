@@ -1,0 +1,6 @@
+{
+  "cancellation_request_id": "cancel-1001",
+  "booking_id": "booking-9001",
+  "cancelled_at": "2026-06-09T12:00:00Z",
+  "reason": "guest_changed_plans"
+}

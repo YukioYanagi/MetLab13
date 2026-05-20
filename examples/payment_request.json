@@ -1,0 +1,7 @@
+{
+  "payment_request_id": "pay-1001",
+  "booking_id": "booking-9001",
+  "amount": 360,
+  "currency": "USD",
+  "payment_method": "card"
+}

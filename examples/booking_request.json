@@ -1,0 +1,11 @@
+{
+  "booking_request_id": "book-1001",
+  "room_id": "aurora-deluxe-305",
+  "guest_profile": {
+    "full_name": "Ivan Petrov",
+    "email": "ivan.petrov@example.com"
+  },
+  "check_in": "2026-06-12",
+  "check_out": "2026-06-14",
+  "payment_hold_id": "hold-501"
+}
